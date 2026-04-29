@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>動画→MOV変換 | ブラウザ内変換ツール</title>
+  <meta name="description" content="MP4/MOV動画をMOV形式に変換するブラウザ内ツール。完全オフライン処理。">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="stylesheet" href="style.css">
+  <script src="coi-serviceworker.js"></script>
+</head>
+<body>
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-overlay__spinner"></div>
+    <p class="loading-overlay__text" id="loadingText">変換エンジンを読み込み中...</p>
+  </div>
+
+  <div class="container">
+    <header class="header">
+      <span class="header__icon">🎬</span>
+      <h1 class="header__title">動画→MOV変換</h1>
+      <p class="header__subtitle">ブラウザ内で完結する安全な変換ツール</p>
+    </header>
+
+    <div class="card" id="selectCard">
+      <div class="card__label">
+        <span class="card__label-icon">📂</span>動画ファイルを選択
+      </div>
+      <div class="file-select" id="fileSelect">
+        <div class="file-select__dropzone" id="dropzone">
+          <span class="file-select__icon">📎</span>
+          <p class="file-select__text">タップしてファイルを選択</p>
+          <p class="file-select__hint">MP4 / MOV に対応</p>
+        </div>
+        <input type="file" id="fileInput" accept="video/mp4,video/quicktime,.mp4,.mov,.MP4,.MOV">
+      </div>
+      <div class="file-info" id="fileInfo">
+        <p class="file-info__name" id="fileName"></p>
+        <p class="file-info__meta" id="fileMeta"></p>
+      </div>
+    </div>
+
+    <button class="btn-convert" id="convertBtn" disabled>MOVに変換する</button>
+
+    <div class="error-message" id="errorMessage">
+      <p class="error-message__text" id="errorText"></p>
+    </div>
+
+    <div class="progress-section" id="progressSection">
+      <div class="card">
+        <div class="card__label"><span class="card__label-icon">⚙️</span>変換中</div>
+        <div class="progress__bar-container">
+          <div class="progress__bar" id="progressBar"></div>
+        </div>
+        <p class="progress__status">
+          <span class="progress__percentage" id="progressPercent">0%</span>
+          <span id="progressText"> 処理中...</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="result-section" id="resultSection">
+      <div class="card">
+        <div class="result__success">
+          <span class="result__check">✅</span>
+          <p class="result__title">変換完了！</p>
+          <p class="result__detail" id="resultDetail"></p>
+        </div>
+        <button class="btn-download" id="downloadBtn">📥 MOVファイルをダウンロード</button>
+        <button class="btn-reset" id="resetBtn">別のファイルを変換する</button>
+      </div>
+    </div>
+
+    <div class="security-badge">
+      <span class="security-badge__icon">🔒</span>
+      <p class="security-badge__text">
+        <span class="security-badge__highlight">完全ブラウザ内処理</span><br>
+        動画データはサーバーに送信されません。すべての変換はこのデバイス上で行われます。
+      </p>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
